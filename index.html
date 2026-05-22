@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>RBXDROP — Купить робуксы дёшево</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Manrope:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@
 <div class="orb orb2"></div>
 <div class="orb orb3"></div>
 
-<!-- CURSOR -->
+<!-- CURSOR (desktop only) -->
 <div class="cur" id="curDot"><div class="cur-dot"></div></div>
 <div class="cur" id="curRing"><div class="cur-ring"></div></div>
 
@@ -30,22 +30,33 @@
       <li><a href="#how">Как это работает</a></li>
       <li><a href="#reviews">Отзывы</a></li>
       <li><a href="#faq">FAQ</a></li>
+      <li><button class="nav-orders-btn" id="navOrders">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="1" width="12" height="14" rx="2"/><path d="M5 5h6M5 8h6M5 11h4"/></svg>
+        Мои заказы
+        <span class="orders-badge" id="navOrdersBadge" style="display:none">0</span>
+      </button></li>
       <li><button class="nav-cta" id="navSupport">Поддержка</button></li>
     </ul>
-    <button class="burger" id="burgerBtn" aria-label="Меню">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="nav-right-mob">
+      <button class="mob-orders-icon" id="mobOrdersIcon" aria-label="Мои заказы">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="1" width="12" height="14" rx="2"/><path d="M5 5h6M5 8h6M5 11h4"/></svg>
+        <span class="orders-badge" id="mobOrdersBadge" style="display:none">0</span>
+      </button>
+      <button class="burger" id="burgerBtn" aria-label="Меню">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
 </nav>
 
 <!-- MOBILE MENU -->
 <div class="mob-menu" id="mobMenu">
   <div class="mob-menu-inner">
-    <a href="#order" class="mob-link">Купить</a>
-    <a href="#how" class="mob-link">Как это работает</a>
-    <a href="#reviews" class="mob-link">Отзывы</a>
-    <a href="#faq" class="mob-link">FAQ</a>
-    <button class="nav-cta mob-cta" id="mobSupport">Поддержка</button>
+    <a href="#order" class="mob-link">🛒 Купить</a>
+    <a href="#how" class="mob-link">📖 Как это работает</a>
+    <a href="#reviews" class="mob-link">⭐ Отзывы</a>
+    <a href="#faq" class="mob-link">❓ FAQ</a>
+    <button class="nav-cta mob-cta" id="mobSupport">💬 Поддержка</button>
   </div>
 </div>
 
@@ -128,13 +139,13 @@
         <div class="how-num">02</div>
         <div class="how-ico ico-b">📝</div>
         <div class="how-title">Введи ник Roblox</div>
-        <div class="how-desc">Укажи точный ник аккаунта, куда нужно доставить робуксы. Мы создадим Game Pass специально для тебя.</div>
+        <div class="how-desc">Укажи точный ник аккаунта, куда нужно доставить робуксы.</div>
       </div>
       <div class="how-card reveal" style="transition-delay:.2s">
         <div class="how-num">03</div>
         <div class="how-ico ico-c">🚀</div>
         <div class="how-title">Оплати и получи</div>
-        <div class="how-desc">После оплаты менеджер в Telegram создаёт Game Pass. Ты покупаешь его в Roblox — робуксы зачислены!</div>
+        <div class="how-desc">После оплаты менеджер создаёт Game Pass. Ты покупаешь его — робуксы зачислены!</div>
       </div>
     </div>
   </section>
@@ -182,7 +193,7 @@
             <div>
               <div class="ab-label">Количество робуксов</div>
               <div class="ab-big" id="abBig">1 200</div>
-              <div class="ab-unit">R O B U X</div>
+              <div class="ab-unit">R$</div>
             </div>
             <div class="ab-rub">
               <div class="ab-rub-v" id="abRub">1 200 ₽</div>
@@ -191,7 +202,7 @@
           </div>
           <div class="sl-track">
             <div class="sl-fill" id="slFill"></div>
-            <input type="range" id="robuxSlider" min="100" max="10000" step="50" value="1200">
+            <input type="range" id="robuxSlider" min="100" max="10000" value="1200" step="50">
           </div>
           <div class="sl-ends"><span>100 R$</span><span>10 000 R$</span></div>
           <div class="presets">
@@ -199,40 +210,42 @@
             <button class="pre" data-v="1000">1 000</button>
             <button class="pre pa" data-v="1200">1 200</button>
             <button class="pre" data-v="2000">2 000</button>
-            <button class="pre" data-v="3000">3 000</button>
             <button class="pre" data-v="5000">5 000</button>
             <button class="pre" data-v="10000">10 000</button>
           </div>
         </div>
 
-        <!-- nick input (mobile — inside main) -->
+        <!-- nick block mobile -->
         <div class="nick-block-mobile">
-          <label class="nick-label">Ник в Roblox</label>
+          <label class="nick-label" for="nickInputMob">Ник Roblox</label>
           <div class="nick-wrap">
-            <input class="nick-inp" id="nickInputMob" type="text" placeholder="Введи ник аккаунта" autocomplete="off">
+            <input class="nick-inp" id="nickInputMob" placeholder="Твой ник..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
             <div class="nick-clear" id="nickClearMob" title="Очистить">✕</div>
           </div>
           <div class="nick-hint" id="nickHintMob"></div>
         </div>
 
+        <!-- mobile order button (shown only on mobile) -->
+        <button class="order-cta mob-order-btn" id="orderBtnMob" style="display:none">
+          <span>Оформить заказ</span>
+          <svg class="btn-arrow" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
       </div>
 
-      <!-- SIDEBAR -->
-      <div class="order-side" id="orderSide">
+      <!-- RIGHT SIDEBAR -->
+      <div class="order-side">
         <div class="os-title">Ваш заказ</div>
-
-        <div class="os-row"><span class="os-key">Способ</span><span class="os-val" id="osMeth">Трансфер</span></div>
         <div class="os-row"><span class="os-key">Робуксы</span><span class="os-val" id="osRbx">1 200 R$</span></div>
-        <div class="os-row"><span class="os-key">Срок</span><span class="os-val">до 5 дней</span></div>
-
+        <div class="os-row"><span class="os-key">Способ</span><span class="os-val" id="osMeth">Трансфер</span></div>
         <div class="os-total">
           <span class="os-total-k">Итого</span>
           <span class="os-total-v" id="osTotal">1 200 ₽</span>
         </div>
 
-        <label class="nick-label">Ник в Roblox</label>
+        <label class="nick-label" for="nickInput">Ник Roblox</label>
         <div class="nick-wrap">
-          <input class="nick-inp" id="nickInput" type="text" placeholder="Введи ник аккаунта" autocomplete="off">
+          <input class="nick-inp" id="nickInput" placeholder="Введи свой ник..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
           <div class="nick-clear" id="nickClear" title="Очистить">✕</div>
         </div>
         <div class="nick-hint" id="nickHint"></div>
@@ -321,23 +334,23 @@
     <div class="faq-list">
       <div class="faq-item">
         <div class="faq-q">Как происходит доставка робуксов?<div class="faq-ic"><svg viewBox="0 0 10 10" fill="none"><line x1="5" y1="1" x2="5" y2="9" stroke-width="1.5" stroke-linecap="round"/><line x1="1" y1="5" x2="9" y2="5" stroke-width="1.5" stroke-linecap="round"/></svg></div></div>
-        <div class="faq-a">Мы создаём специальный Game Pass в Roblox на нужную сумму. Ты покупаешь его в магазине Roblox, и робуксы сразу зачисляются на твой аккаунт. Это официальный механизм Roblox — полностью безопасно.</div>
+        <div class="faq-a">Мы создаём специальный Game Pass в Roblox на нужную сумму. Ты покупаешь его в магазине Roblox, и робуксы сразу зачисляются на твой аккаунт.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Как быстро придут робуксы после оплаты?<div class="faq-ic"><svg viewBox="0 0 10 10" fill="none"><line x1="5" y1="1" x2="5" y2="9" stroke-width="1.5" stroke-linecap="round"/><line x1="1" y1="5" x2="9" y2="5" stroke-width="1.5" stroke-linecap="round"/></svg></div></div>
-        <div class="faq-a">В большинстве случаев — в течение нескольких часов после оплаты. Максимальный срок — 5 рабочих дней. Если возникает задержка, наш менеджер всегда на связи в Telegram.</div>
+        <div class="faq-a">В большинстве случаев — в течение нескольких часов. Максимальный срок — 5 рабочих дней.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Это безопасно для моего аккаунта Roblox?<div class="faq-ic"><svg viewBox="0 0 10 10" fill="none"><line x1="5" y1="1" x2="5" y2="9" stroke-width="1.5" stroke-linecap="round"/><line x1="1" y1="5" x2="9" y2="5" stroke-width="1.5" stroke-linecap="round"/></svg></div></div>
-        <div class="faq-a">Да, абсолютно. Мы не просим пароль или данные для входа. Тебе нужен только ник аккаунта. Вся сделка происходит через официальный Roblox Marketplace — никакого взлома и сторонних клиентов.</div>
+        <div class="faq-a">Да, абсолютно. Мы не просим пароль. Всё через официальный Roblox Marketplace — никакого взлома и сторонних клиентов.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Что делать, если что-то пошло не так?<div class="faq-ic"><svg viewBox="0 0 10 10" fill="none"><line x1="5" y1="1" x2="5" y2="9" stroke-width="1.5" stroke-linecap="round"/><line x1="1" y1="5" x2="9" y2="5" stroke-width="1.5" stroke-linecap="round"/></svg></div></div>
-        <div class="faq-a">Пиши нам в Telegram: @RbxShop_Manager. Мы отвечаем 24/7 и решаем любые проблемы. Если по нашей вине что-то не получилось — вернём деньги или повторим доставку бесплатно.</div>
+        <div class="faq-a">Пиши нам в Telegram: @RbxShop_Manager. Мы отвечаем 24/7. Если по нашей вине что-то не получилось — вернём деньги или повторим доставку бесплатно.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Есть ли минимальная и максимальная сумма заказа?<div class="faq-ic"><svg viewBox="0 0 10 10" fill="none"><line x1="5" y1="1" x2="5" y2="9" stroke-width="1.5" stroke-linecap="round"/><line x1="1" y1="5" x2="9" y2="5" stroke-width="1.5" stroke-linecap="round"/></svg></div></div>
-        <div class="faq-a">Минимальный заказ — 100 R$. Максимум через сайт — 10 000 R$. Если нужно больше — напиши менеджеру в Telegram, сделаем индивидуальный заказ на любую сумму.</div>
+        <div class="faq-a">Минимальный заказ — 100 R$. Максимум через сайт — 10 000 R$. Если нужно больше — напиши менеджеру в Telegram.</div>
       </div>
     </div>
   </section>
@@ -407,6 +420,21 @@
       <button class="m-close" id="mClose">Закрыть</button>
       <button class="m-copy" id="mCopy">Копировать</button>
     </div>
+  </div>
+</div>
+
+<!-- ORDERS PANEL -->
+<div class="orders-overlay" id="ordersOverlay"></div>
+<div class="orders-panel" id="ordersPanel">
+  <div class="orders-header">
+    <div class="orders-title">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="1" width="12" height="14" rx="2"/><path d="M5 5h6M5 8h6M5 11h4"/></svg>
+      Мои заказы
+    </div>
+    <button class="orders-close" id="ordersClose">✕</button>
+  </div>
+  <div class="orders-body" id="ordersBody">
+    <!-- filled by JS -->
   </div>
 </div>
 

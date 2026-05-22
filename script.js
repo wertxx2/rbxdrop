@@ -1,52 +1,51 @@
-/* ─── CURSOR ─── */
+/* ── DEVICE DETECTION ── */
+const isMobile = () => window.matchMedia('(pointer: coarse)').matches;
+
+/* ── CURSOR (desktop only) ── */
 const curDot = document.getElementById('curDot');
 const curRing = document.getElementById('curRing');
 let mx = 0, my = 0, rx = 0, ry = 0;
 
-document.addEventListener('mousemove', e => {
-  mx = e.clientX;
-  my = e.clientY;
-  curDot.style.left = mx + 'px';
-  curDot.style.top = my + 'px';
-});
-
-function animRing() {
-  rx += (mx - rx) * .12;
-  ry += (my - ry) * .12;
-  curRing.style.left = rx + 'px';
-  curRing.style.top = ry + 'px';
-  requestAnimationFrame(animRing);
+if (!isMobile()) {
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    curDot.style.left = mx + 'px';
+    curDot.style.top = my + 'px';
+  });
+  function animRing() {
+    rx += (mx - rx) * .12;
+    ry += (my - ry) * .12;
+    curRing.style.left = rx + 'px';
+    curRing.style.top = ry + 'px';
+    requestAnimationFrame(animRing);
+  }
+  animRing();
 }
-animRing();
 
-/* ─── NAV: scroll shadow + active link highlight ─── */
+/* ── NAV ── */
 const mainNav = document.getElementById('mainNav');
 window.addEventListener('scroll', () => {
   mainNav.classList.toggle('scrolled', window.scrollY > 20);
-  // highlight active section in nav
-  const sections = ['order', 'how', 'reviews', 'faq'];
+  const sections = ['order','how','reviews','faq'];
   let current = '';
   sections.forEach(id => {
     const el = document.getElementById(id);
     if (el && window.scrollY >= el.offsetTop - 120) current = id;
   });
   document.querySelectorAll('.nav-links a').forEach(a => {
-    const href = a.getAttribute('href')?.replace('#', '');
+    const href = a.getAttribute('href')?.replace('#','');
     a.style.color = href === current ? 'var(--text)' : '';
   });
 }, { passive: true });
 
-/* ─── MOBILE BURGER ─── */
+/* ── MOBILE BURGER ── */
 const burgerBtn = document.getElementById('burgerBtn');
 const mobMenu = document.getElementById('mobMenu');
-
 burgerBtn.addEventListener('click', () => {
   const open = mobMenu.classList.toggle('open');
   burgerBtn.classList.toggle('open', open);
   document.body.style.overflow = open ? 'hidden' : '';
 });
-
-// close on link click
 document.querySelectorAll('.mob-link').forEach(a => {
   a.addEventListener('click', () => {
     mobMenu.classList.remove('open');
@@ -55,7 +54,7 @@ document.querySelectorAll('.mob-link').forEach(a => {
   });
 });
 
-/* ─── MODAL ─── */
+/* ── MODAL ── */
 const modal = document.getElementById('modal');
 const mIco = document.getElementById('mIco');
 const mTitle = document.getElementById('mTitle');
@@ -67,7 +66,6 @@ function showModal(o) {
   mIco.className = 'm-ico' + (o.err ? ' merr' : o.warn ? ' mwarn' : '');
   mTitle.textContent = o.title;
   mText.textContent = o.text || '';
-
   const mCopy = document.getElementById('mCopy');
   if (o.code) {
     mCode.textContent = o.code;
@@ -78,19 +76,19 @@ function showModal(o) {
     mCode.classList.remove('show');
     if (mCopy) mCopy.classList.remove('show');
   }
-
   modal.classList.add('show');
   document.body.style.overflow = 'hidden';
 }
 
 function closeModal() {
   modal.classList.remove('show');
-  document.body.style.overflow = '';
+  // don't re-enable scroll if orders panel open
+  if (!document.getElementById('ordersPanel').classList.contains('open')) {
+    document.body.style.overflow = '';
+  }
 }
 
 document.getElementById('mClose').addEventListener('click', closeModal);
-
-// copy order info
 const mCopyBtn = document.getElementById('mCopy');
 if (mCopyBtn) {
   mCopyBtn.addEventListener('click', () => {
@@ -100,11 +98,10 @@ if (mCopyBtn) {
     });
   });
 }
-
 modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeOrdersPanel(); } });
 
-/* ─── TOAST ─── */
+/* ── TOAST ── */
 function toast(msg, dur = 2200) {
   const tc = document.getElementById('toasts');
   const t = document.createElement('div');
@@ -114,10 +111,10 @@ function toast(msg, dur = 2200) {
   setTimeout(() => t.remove(), dur);
 }
 
-/* ─── FORMAT NUMBER ─── */
+/* ── FORMAT ── */
 function fmt(n) { return n.toLocaleString('ru'); }
 
-/* ─── SLIDER STATE ─── */
+/* ── SLIDER STATE ── */
 const slider = document.getElementById('robuxSlider');
 const slFill = document.getElementById('slFill');
 const abBig = document.getElementById('abBig');
@@ -137,40 +134,30 @@ let prevVal = 0;
 function updateAll() {
   const v = parseInt(slider.value);
   const pct = ((v - 100) / (10000 - 100)) * 100;
-
   slFill.style.width = pct + '%';
-
   if (v !== prevVal) {
     abBig.textContent = fmt(v);
     abBig.classList.add('pop');
     setTimeout(() => abBig.classList.remove('pop'), 160);
     prevVal = v;
   }
-
   const rub = Math.round(v * activeRate);
   abRub.textContent = fmt(rub) + ' ₽';
   osRbx.textContent = fmt(v) + ' R$';
   osTotal.textContent = fmt(rub) + ' ₽';
-
-  // hero card
   heroCount.textContent = fmt(v);
   heroSub.textContent = 'Robux · ' + activeMethodName;
   heroBar.style.width = (pct * 0.8 + 10) + '%';
-
-  // sticky bar
   if (stickyRbx) stickyRbx.textContent = fmt(v) + ' R$';
   if (stickyPrice) stickyPrice.textContent = fmt(rub) + ' ₽';
-
-  // presets
   document.querySelectorAll('.pre').forEach(b =>
     b.classList.toggle('pa', parseInt(b.dataset.v) === v)
   );
 }
-
 slider.addEventListener('input', updateAll);
 updateAll();
 
-/* ─── PRESETS ─── */
+/* ── PRESETS ── */
 document.querySelectorAll('.pre').forEach(b => {
   b.addEventListener('click', () => {
     slider.value = b.dataset.v;
@@ -179,16 +166,11 @@ document.querySelectorAll('.pre').forEach(b => {
   });
 });
 
-/* ─── METHOD CARDS ─── */
+/* ── METHOD CARDS ── */
 document.querySelectorAll('.mcard').forEach(c => {
   c.addEventListener('click', () => {
     if (c.dataset.available !== 'true') {
-      showModal({
-        icon: '⏳',
-        title: 'Скоро появится',
-        text: `«${c.dataset.name}» пока недоступен. Используй Трансфер — уже работает!`,
-        warn: true
-      });
+      showModal({ icon:'⏳', title:'Скоро появится', text:`«${c.dataset.name}» пока недоступен. Используй Трансфер — уже работает!`, warn:true });
       return;
     }
     document.querySelectorAll('.mcard').forEach(x => x.classList.remove('mactive'));
@@ -201,49 +183,29 @@ document.querySelectorAll('.mcard').forEach(c => {
   });
 });
 
-/* ─── NICK INPUT (both desktop sidebar + mobile block) ─── */
+/* ── NICK INPUTS ── */
 function setupNickInput(inputId, clearId, hintId) {
   const input = document.getElementById(inputId);
   const clearBtn = document.getElementById(clearId);
   const hint = document.getElementById(hintId);
   if (!input) return;
-
   const heroNickDisp = document.getElementById('heroNickDisp');
   const heroAv = document.getElementById('heroAv');
 
   function validate(v) {
-    if (!v) {
-      hint.textContent = '';
-      hint.className = 'nick-hint';
-      input.classList.remove('valid');
-      return;
-    }
-    if (v.length < 3) {
-      hint.textContent = 'Минимум 3 символа';
-      hint.className = 'nick-hint err';
-      input.classList.remove('valid');
-      return;
-    }
-    if (!/^[a-zA-Z0-9_]+$/.test(v)) {
-      hint.textContent = 'Только латиница, цифры и _';
-      hint.className = 'nick-hint err';
-      input.classList.remove('valid');
-      return;
-    }
-    hint.textContent = '✓ Ник выглядит верно';
-    hint.className = 'nick-hint';
-    input.classList.add('valid');
+    if (!v) { hint.textContent=''; hint.className='nick-hint'; input.classList.remove('valid'); return; }
+    if (v.length < 3) { hint.textContent='Минимум 3 символа'; hint.className='nick-hint err'; input.classList.remove('valid'); return; }
+    if (!/^[a-zA-Z0-9_]+$/.test(v)) { hint.textContent='Только латиница, цифры и _'; hint.className='nick-hint err'; input.classList.remove('valid'); return; }
+    hint.textContent='✓ Ник выглядит верно'; hint.className='nick-hint'; input.classList.add('valid');
   }
 
   input.addEventListener('input', () => {
     const v = input.value.trim();
     clearBtn.classList.toggle('visible', v.length > 0);
     validate(v);
-    // sync both inputs
     const otherId = inputId === 'nickInput' ? 'nickInputMob' : 'nickInput';
     const other = document.getElementById(otherId);
     if (other) other.value = input.value;
-    // hero card preview
     if (heroNickDisp) heroNickDisp.textContent = v || '—';
     if (heroAv) heroAv.textContent = v ? v[0].toUpperCase() : '?';
   });
@@ -258,74 +220,208 @@ function setupNickInput(inputId, clearId, hintId) {
 setupNickInput('nickInput', 'nickClear', 'nickHint');
 setupNickInput('nickInputMob', 'nickClearMob', 'nickHintMob');
 
-/* ─── GET NICK VALUE (either input) ─── */
 function getNick() {
   const a = document.getElementById('nickInput');
   const b = document.getElementById('nickInputMob');
   return (a?.value || b?.value || '').trim();
 }
 
-/* ─── ORDER SUBMIT ─── */
+/* ─────────────────────────────────────────
+   ORDER HISTORY (localStorage)
+───────────────────────────────────────── */
+const STORAGE_KEY = 'rbxdrop_orders';
+
+function loadOrders() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+  catch { return []; }
+}
+
+function saveOrders(orders) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(orders));
+}
+
+function addOrder(order) {
+  const orders = loadOrders();
+  orders.unshift(order); // newest first
+  saveOrders(orders);
+  updateOrdersBadge();
+}
+
+function clearOrders() {
+  localStorage.removeItem(STORAGE_KEY);
+  updateOrdersBadge();
+  renderOrdersPanel();
+}
+
+function updateOrdersBadge() {
+  const orders = loadOrders();
+  const count = orders.length;
+  [document.getElementById('navOrdersBadge'), document.getElementById('mobOrdersBadge')].forEach(b => {
+    if (!b) return;
+    b.textContent = count;
+    b.style.display = count > 0 ? 'inline-block' : 'none';
+  });
+}
+
+function genOrderId() {
+  return 'RBX-' + Date.now().toString(36).toUpperCase().slice(-6);
+}
+
+function renderOrdersPanel() {
+  const body = document.getElementById('ordersBody');
+  const orders = loadOrders();
+
+  if (orders.length === 0) {
+    body.innerHTML = `
+      <div class="orders-empty">
+        <div class="orders-empty-ico">📋</div>
+        <div class="orders-empty-t">Заказов пока нет</div>
+        <div class="orders-empty-s">Твои заказы будут сохраняться здесь автоматически после оформления.</div>
+      </div>`;
+    return;
+  }
+
+  const now = Date.now();
+  body.innerHTML = orders.map(o => {
+    // status logic: pending for 30 min, processing for 3 days, then done
+    const age = now - o.timestamp;
+    let status, statusLabel;
+    if (age < 30 * 60 * 1000) { status = 'st-pending'; statusLabel = 'Ожидает'; }
+    else if (age < 3 * 24 * 60 * 60 * 1000) { status = 'st-processing'; statusLabel = 'Обрабатывается'; }
+    else { status = 'st-done'; statusLabel = 'Выполнен'; }
+
+    const isActive = status === 'st-pending';
+    const d = new Date(o.timestamp);
+    const dateStr = d.toLocaleString('ru', { day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit' });
+
+    return `
+      <div class="order-card ${isActive ? 'active-order' : ''}">
+        <div class="oc-header">
+          <div class="oc-id">${o.id}</div>
+          <div class="oc-status ${status}">${statusLabel}</div>
+        </div>
+        <div class="oc-rbx">${fmt(o.robux)} R$</div>
+        <div class="oc-method">${o.method}</div>
+        <div class="oc-meta">
+          <div class="oc-nick">${o.nick}</div>
+          <div class="oc-price">${fmt(o.price)} ₽</div>
+        </div>
+        <div class="oc-date">${dateStr}</div>
+      </div>`;
+  }).join('');
+}
+
+/* ── ORDERS PANEL ── */
+const ordersPanel = document.getElementById('ordersPanel');
+const ordersOverlay = document.getElementById('ordersOverlay');
+
+function openOrdersPanel() {
+  renderOrdersPanel();
+  ordersPanel.classList.add('open');
+  ordersOverlay.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeOrdersPanel() {
+  ordersPanel.classList.remove('open');
+  ordersOverlay.classList.remove('show');
+  if (!modal.classList.contains('show')) document.body.style.overflow = '';
+}
+
+document.getElementById('ordersClose').addEventListener('click', closeOrdersPanel);
+ordersOverlay.addEventListener('click', closeOrdersPanel);
+
+document.getElementById('navOrders').addEventListener('click', openOrdersPanel);
+const mobOrdersIcon = document.getElementById('mobOrdersIcon');
+if (mobOrdersIcon) mobOrdersIcon.addEventListener('click', openOrdersPanel);
+
+document.getElementById('orders-clear-btn-ref')?.addEventListener('click', () => {});
+// footer clear btn rendered in panel
+document.getElementById('ordersPanel').addEventListener('click', e => {
+  if (e.target.closest('.orders-clear-btn')) {
+    if (confirm('Очистить всю историю заказов?')) {
+      clearOrders();
+      toast('🗑 История очищена');
+    }
+  }
+});
+
+// Inject footer into orders panel
+const ordersFooter = document.createElement('div');
+ordersFooter.className = 'orders-footer';
+ordersFooter.innerHTML = '<button class="orders-clear-btn">Очистить историю</button>';
+ordersPanel.appendChild(ordersFooter);
+
+/* ── ORDER SUBMIT ── */
 function submitOrder() {
   const nick = getNick();
   if (!nick) {
-    showModal({ icon: '⚠️', title: 'Введи ник', text: 'Укажи ник своего Roblox аккаунта для оформления заказа.', warn: true });
-    (document.getElementById('nickInput') || document.getElementById('nickInputMob'))?.focus();
+    showModal({ icon:'⚠️', title:'Введи ник', text:'Укажи ник своего Roblox аккаунта для оформления заказа.', warn:true });
+    (document.getElementById('nickInputMob') || document.getElementById('nickInput'))?.focus();
     return;
   }
   if (nick.length < 3) {
-    showModal({ icon: '⚠️', title: 'Слишком короткий ник', text: 'Ник должен содержать минимум 3 символа.', err: true });
+    showModal({ icon:'⚠️', title:'Слишком короткий ник', text:'Ник должен содержать минимум 3 символа.', err:true });
     return;
   }
   if (!/^[a-zA-Z0-9_]+$/.test(nick)) {
-    showModal({ icon: '⚠️', title: 'Неверный формат ника', text: 'Ник может содержать только латинские буквы, цифры и символ _', err: true });
+    showModal({ icon:'⚠️', title:'Неверный формат ника', text:'Ник может содержать только латинские буквы, цифры и символ _', err:true });
     return;
   }
 
   const v = parseInt(slider.value);
   const rub = Math.round(v * activeRate);
+  const orderId = genOrderId();
+
+  // Save to history
+  addOrder({
+    id: orderId,
+    nick: nick,
+    robux: v,
+    price: rub,
+    method: activeMethodName,
+    timestamp: Date.now()
+  });
 
   showModal({
     icon: '🎉',
     title: 'Заказ принят!',
     text: 'Наш менеджер свяжется с тобой в Telegram и пришлёт ссылку на Game Pass для оплаты.',
-    code: `Аккаунт:  ${nick}\nСумма:    ${fmt(v)} R$\nК оплате: ${fmt(rub)} ₽\nСпособ:   ${activeMethodName}\n\nТелеграм: @RbxShop_Manager`
+    code: `ID заказа: ${orderId}\nАккаунт:  ${nick}\nСумма:    ${fmt(v)} R$\nК оплате: ${fmt(rub)} ₽\nСпособ:   ${activeMethodName}\n\nТелеграм: @RbxShop_Manager`
   });
 }
 
 document.getElementById('orderBtn').addEventListener('click', submitOrder);
 const stickyOrderBtn = document.getElementById('stickyOrderBtn');
 if (stickyOrderBtn) stickyOrderBtn.addEventListener('click', submitOrder);
+const orderBtnMob = document.getElementById('orderBtnMob');
+if (orderBtnMob) orderBtnMob.addEventListener('click', submitOrder);
 
-/* ─── NAV BUTTONS ─── */
+/* ── NAV BUTTONS ── */
 document.getElementById('navHome').addEventListener('click', e => {
   e.preventDefault();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo({ top:0, behavior:'smooth' });
 });
 
 function openSupport() {
-  showModal({
-    icon: '💬',
-    title: 'Поддержка 24/7',
-    text: 'Пиши нам в Telegram — ответим быстро:\n\n@RbxShop_Manager\n@palofsc\n\nСреднее время ответа — 5 минут.'
-  });
+  showModal({ icon:'💬', title:'Поддержка 24/7', text:'Пиши нам в Telegram — ответим быстро:\n\n@RbxShop_Manager\n@palofsc\n\nСреднее время ответа — 5 минут.' });
 }
 document.getElementById('navSupport').addEventListener('click', openSupport);
 const mobSupport = document.getElementById('mobSupport');
 if (mobSupport) mobSupport.addEventListener('click', openSupport);
 
 document.getElementById('heroBuyBtn').addEventListener('click', () => {
-  document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
+  document.getElementById('order').scrollIntoView({ behavior:'smooth' });
 });
 document.getElementById('heroHowBtn').addEventListener('click', () => {
-  document.getElementById('how').scrollIntoView({ behavior: 'smooth' });
+  document.getElementById('how').scrollIntoView({ behavior:'smooth' });
 });
 const bannerBuyBtn = document.getElementById('bannerBuyBtn');
 if (bannerBuyBtn) bannerBuyBtn.addEventListener('click', () => {
-  document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
+  document.getElementById('order').scrollIntoView({ behavior:'smooth' });
 });
 
-/* ─── FAQ ─── */
+/* ── FAQ ── */
 document.querySelectorAll('.faq-q').forEach(q => {
   q.addEventListener('click', () => {
     const item = q.parentElement;
@@ -335,27 +431,26 @@ document.querySelectorAll('.faq-q').forEach(q => {
   });
 });
 
-/* ─── SCROLL REVEAL ─── */
+/* ── SCROLL REVEAL ── */
 const revEls = document.querySelectorAll('.reveal');
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('vis');
-      obs.unobserve(e.target);
-    }
+    if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); }
   });
-}, { threshold: .12 });
+}, { threshold:.12 });
 revEls.forEach(el => obs.observe(el));
 
-/* ─── STICKY BAR: show only on mobile when order section visible ─── */
+/* ── STICKY BAR ── */
 const stickyBar = document.getElementById('stickyBar');
 const orderSection = document.getElementById('order');
-
 if (stickyBar && orderSection) {
   const stickyObs = new IntersectionObserver(entries => {
     const inView = entries[0].isIntersecting;
     stickyBar.style.transform = inView ? 'translateY(0)' : 'translateY(100%)';
     stickyBar.style.transition = 'transform .3s ease';
-  }, { threshold: .05 });
+  }, { threshold:.05 });
   stickyObs.observe(orderSection);
 }
+
+/* ── INIT ── */
+updateOrdersBadge();
