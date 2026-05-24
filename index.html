@@ -44,9 +44,9 @@
 <div class="mob-menu" id="mobMenu">
   <div class="mob-menu-inner">
     <a href="#order" class="mob-link">🛒 Купить</a>
-    <a href="#how" class="mob-link">📖 Как это работает</a>
+    <a href="#how"   class="mob-link">📖 Как это работает</a>
     <a href="#reviews" class="mob-link">⭐ Отзывы</a>
-    <a href="#faq" class="mob-link">❓ FAQ</a>
+    <a href="#faq"   class="mob-link">❓ FAQ</a>
     <button class="nav-cta mob-cta" id="mobSupport">💬 Поддержка</button>
   </div>
 </div>
@@ -64,26 +64,16 @@
         <p class="hero-sub">Трансфер через Game Pass прямо на твой аккаунт. Проверенный продавец, поддержка 24/7.</p>
         <div class="hero-btns">
           <button class="btn-prim" id="heroBuyBtn">Купить робуксы →</button>
-          <button class="btn-sec" id="heroHowBtn">Как это работает</button>
+          <button class="btn-sec"  id="heroHowBtn">Как это работает</button>
         </div>
         <div class="hero-stats">
-          <div class="hstat">
-            <span class="hstat-v">Мгновенно</span>
-            <span class="hstat-l">Трансфер</span>
-          </div>
+          <div class="hstat"><span class="hstat-v">Мгновенно</span><span class="hstat-l">Трансфер</span></div>
           <div class="hstat-sep"></div>
-          <div class="hstat">
-            <span class="hstat-v">до 5 дн.</span>
-            <span class="hstat-l">Срок доставки</span>
-          </div>
+          <div class="hstat"><span class="hstat-v">до 5 дн.</span><span class="hstat-l">Срок доставки</span></div>
           <div class="hstat-sep"></div>
-          <div class="hstat">
-            <span class="hstat-v">24 / 7</span>
-            <span class="hstat-l">Поддержка</span>
-          </div>
+          <div class="hstat"><span class="hstat-v">24 / 7</span><span class="hstat-l">Поддержка</span></div>
         </div>
       </div>
-
       <div class="hero-vis">
         <div class="fbadge fbadge1">✓ Заказ доставлен</div>
         <div class="hero-card">
@@ -154,14 +144,10 @@
     <div class="order-layout">
       <!-- LEFT -->
       <div class="order-main">
-
-        <!-- methods -->
         <p class="method-label">Способ получения</p>
         <div class="methods-row" id="methodsGrid">
           <div class="mcard mactive" data-method="transfer" data-rate="1" data-available="true">
-            <div class="mcheck">
-              <svg viewBox="0 0 10 8" fill="none"><path d="M1 4l2.5 2.5L9 1" stroke="#050608" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
+            <div class="mcheck"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l2.5 2.5L9 1" stroke="#050608" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
             <span class="mtag t-avail">Доступно</span>
             <div class="mname">Трансфер</div>
             <div class="mdesc">Game Pass на твой аккаунт</div>
@@ -188,7 +174,7 @@
             </div>
             <div class="ab-rub">
               <div class="ab-rub-v" id="abRub">1 200 ₽</div>
-              <div class="ab-rub-l">К оплате</div>
+              <div class="ab-rub-l">к оплате</div>
             </div>
           </div>
           <div class="sl-track">
@@ -197,44 +183,37 @@
           </div>
           <div class="sl-ends"><span>100 R$</span><span>10 000 R$</span></div>
           <div class="presets">
-            <button class="pre" data-v="500">500</button>
-            <button class="pre" data-v="1000">1 000</button>
-            <button class="pre pa" data-v="1200">1 200</button>
-            <button class="pre" data-v="2000">2 000</button>
-            <button class="pre" data-v="5000">5 000</button>
-            <button class="pre" data-v="10000">10 000</button>
+            <button class="pre" data-v="500">500 R$</button>
+            <button class="pre" data-v="1000">1 000 R$</button>
+            <button class="pre" data-v="2000">2 000 R$</button>
+            <button class="pre" data-v="5000">5 000 R$</button>
+            <button class="pre" data-v="10000">10 000 R$</button>
           </div>
         </div>
 
-        <!-- nick block mobile -->
-        <div class="nick-block-mobile">
-          <label class="nick-label" for="nickInputMob">Ник Roblox</label>
+        <!-- nick (mobile) -->
+        <div class="nick-block-mobile" id="nickBlockMobile">
+          <label class="nick-label" for="nickInputMob">Ник в Roblox</label>
           <div class="nick-wrap">
-            <input class="nick-inp" id="nickInputMob" placeholder="Твой ник..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+            <input class="nick-inp" id="nickInputMob" placeholder="Введи свой ник..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
             <div class="nick-clear" id="nickClearMob" title="Очистить">✕</div>
           </div>
           <div class="nick-hint" id="nickHintMob"></div>
+          <button class="order-cta mob-order-btn" id="orderBtnMob" style="display:none">
+            <span>Оформить заказ</span>
+            <svg class="btn-arrow" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
         </div>
-
-        <!-- mobile order button (shown only on mobile) -->
-        <button class="order-cta mob-order-btn" id="orderBtnMob" style="display:none">
-          <span>Оформить заказ</span>
-          <svg class="btn-arrow" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-
       </div>
 
       <!-- RIGHT SIDEBAR -->
       <div class="order-side">
         <div class="os-title">Ваш заказ</div>
-        <div class="os-row"><span class="os-key">Робуксы</span><span class="os-val" id="osRbx">1 200 R$</span></div>
         <div class="os-row"><span class="os-key">Способ</span><span class="os-val" id="osMeth">Трансфер</span></div>
-        <div class="os-total">
-          <span class="os-total-k">Итого</span>
-          <span class="os-total-v" id="osTotal">1 200 ₽</span>
-        </div>
+        <div class="os-row"><span class="os-key">Количество</span><span class="os-val" id="osRbx">1 200 R$</span></div>
+        <div class="os-total"><span class="os-total-k">К оплате</span><span class="os-total-v" id="osTotal">1 200 ₽</span></div>
 
-        <label class="nick-label" for="nickInput">Ник Roblox</label>
+        <label class="nick-label" for="nickInput">Ник в Roblox</label>
         <div class="nick-wrap">
           <input class="nick-inp" id="nickInput" placeholder="Введи свой ник..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
           <div class="nick-clear" id="nickClear" title="Очистить">✕</div>
@@ -405,11 +384,11 @@
   <div class="modal-box">
     <div class="m-ico" id="mIco">✅</div>
     <div class="m-title" id="mTitle"></div>
-    <div class="m-text" id="mText"></div>
-    <div class="m-code" id="mCode"></div>
+    <div class="m-text"  id="mText"></div>
+    <div class="m-code"  id="mCode"></div>
     <div class="m-btns">
       <button class="m-close" id="mClose">Закрыть</button>
-      <button class="m-copy" id="mCopy">Копировать</button>
+      <button class="m-copy"  id="mCopy">Копировать</button>
     </div>
   </div>
 </div>
