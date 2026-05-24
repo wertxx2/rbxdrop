@@ -218,9 +218,7 @@ document.addEventListener('keydown', e => {
 /* ════════════════════════════════════════════════════
    MAIN PAGE SCRIPTS (index.html)
    ════════════════════════════════════════════════════ */
-if (localStorage.getItem("loggedIn") !== "true") {
-    window.location.href = "login.html";
-}
+
 /* ─────────────────────────────────────────
    DEVICE DETECTION
 ───────────────────────────────────────── */
