@@ -116,32 +116,8 @@ nav.scrolled { box-shadow:0 4px 40px rgba(0,0,0,.4); }
 }
 .nav-cta:hover { background:var(--acc2); transform:scale(.97); }
 
-/* Nav orders button */
-.nav-orders-btn {
-  display:flex; align-items:center; gap:.4rem; background:var(--s2);
-  border:1px solid var(--border2); border-radius:10px; padding:.5rem 1rem;
-  color:var(--muted2); font-size:.8rem; font-weight:600; cursor:none;
-  transition:all .2s; font-family:'Manrope',sans-serif; position:relative;
-}
-.nav-orders-btn svg { width:14px; height:14px; }
-.nav-orders-btn:hover { border-color:rgba(255,155,47,.4); color:var(--acc); }
-
-.orders-badge {
-  background:var(--acc); color:#050608; font-size:.6rem; font-weight:800;
-  border-radius:100px; padding:.1rem .4rem; font-family:'Space Mono',monospace;
-  min-width:16px; text-align:center;
-}
-
 /* Burger + mobile icons */
 .nav-right-mob { display:none; align-items:center; gap:.6rem; }
-.mob-orders-icon {
-  position:relative; background:var(--s2); border:1px solid var(--border);
-  border-radius:10px; width:38px; height:38px; display:flex; align-items:center;
-  justify-content:center; cursor:pointer; transition:all .2s;
-}
-.mob-orders-icon svg { width:16px; height:16px; stroke:var(--muted2); }
-.mob-orders-icon:hover { border-color:rgba(255,155,47,.4); }
-.mob-orders-icon .orders-badge { position:absolute; top:-5px; right:-5px; }
 
 .burger { display:flex; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:.4rem; }
 .burger span { display:block; width:22px; height:2px; background:var(--text); border-radius:2px; transition:all .3s; }
@@ -424,62 +400,6 @@ footer { border-top:1px solid var(--border); padding:3rem 0; }
 .m-copy { background:var(--acc3); border:1px solid rgba(255,155,47,.2); border-radius:12px; padding:.85rem 1.2rem; color:var(--acc); font-family:'Manrope',sans-serif; font-size:.9rem; font-weight:600; cursor:pointer; transition:all .2s; display:none; }
 .m-copy.show { display:block; }
 .m-copy:hover { background:rgba(255,155,47,.2); }
-
-/* ── ORDERS PANEL ── */
-.orders-overlay { position:fixed; inset:0; background:rgba(0,0,0,.6); backdrop-filter:blur(8px); z-index:600; opacity:0; pointer-events:none; transition:opacity .3s; }
-.orders-overlay.show { opacity:1; pointer-events:all; }
-.orders-panel {
-  position:fixed; top:0; right:0; bottom:0; z-index:700;
-  width:min(440px, 100vw); background:var(--s1);
-  border-left:1px solid var(--border2); display:flex; flex-direction:column;
-  transform:translateX(100%); transition:transform .4s cubic-bezier(.22,1,.36,1);
-}
-.orders-panel.open { transform:translateX(0); }
-.orders-header {
-  display:flex; justify-content:space-between; align-items:center;
-  padding:1.5rem 2rem; border-bottom:1px solid var(--border);
-  background:var(--s1); flex-shrink:0;
-}
-.orders-title { font-family:'Syne',sans-serif; font-size:1.1rem; font-weight:800; display:flex; align-items:center; gap:.6rem; }
-.orders-title svg { width:18px; height:18px; stroke:var(--acc); }
-.orders-close { background:var(--s2); border:1px solid var(--border); border-radius:8px; width:32px; height:32px; color:var(--muted2); cursor:pointer; font-size:.9rem; display:flex; align-items:center; justify-content:center; transition:all .2s; }
-.orders-close:hover { border-color:rgba(239,68,68,.3); color:#f87171; }
-.orders-body { flex:1; overflow-y:auto; padding:1.5rem 2rem; }
-.orders-body::-webkit-scrollbar { width:4px; }
-.orders-body::-webkit-scrollbar-track { background:transparent; }
-.orders-body::-webkit-scrollbar-thumb { background:var(--s3); border-radius:4px; }
-
-/* empty state */
-.orders-empty { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; text-align:center; padding:2rem; gap:1rem; }
-.orders-empty-ico { font-size:3rem; opacity:.4; }
-.orders-empty-t { font-family:'Syne',sans-serif; font-size:1.1rem; font-weight:700; color:var(--muted2); }
-.orders-empty-s { font-size:.85rem; color:var(--muted); line-height:1.5; }
-
-/* order card in panel */
-.order-card {
-  background:var(--s2); border:1px solid var(--border); border-radius:16px;
-  padding:1.3rem; margin-bottom:.8rem; transition:border-color .2s;
-  position:relative; overflow:hidden;
-}
-.order-card.active-order { border-color:rgba(255,155,47,.4); }
-.order-card.active-order::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--acc),var(--acc2)); }
-.oc-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:.8rem; }
-.oc-id { font-family:'Space Mono',monospace; font-size:.65rem; color:var(--muted); }
-.oc-status { font-size:.65rem; font-weight:700; padding:.2rem .55rem; border-radius:6px; letter-spacing:.04em; text-transform:uppercase; }
-.oc-status.st-pending { background:rgba(255,155,47,.15); color:var(--acc); }
-.oc-status.st-processing { background:rgba(79,142,255,.15); color:var(--blu); }
-.oc-status.st-done { background:rgba(31,216,154,.15); color:var(--grn); }
-.oc-rbx { font-family:'Syne',sans-serif; font-size:1.5rem; font-weight:800; letter-spacing:-.03em; margin-bottom:.2rem; }
-.oc-meta { display:flex; justify-content:space-between; align-items:center; margin-top:.8rem; padding-top:.8rem; border-top:1px solid var(--border); }
-.oc-nick { font-size:.8rem; color:var(--muted2); display:flex; align-items:center; gap:.4rem; }
-.oc-nick::before { content:'@'; color:var(--muted); font-family:'Space Mono',monospace; font-size:.7rem; }
-.oc-price { font-family:'Space Mono',monospace; font-size:.8rem; color:var(--acc); font-weight:700; }
-.oc-date { font-size:.7rem; color:var(--muted); margin-top:.4rem; }
-.oc-method { font-size:.7rem; color:var(--muted); font-family:'Space Mono',monospace; }
-
-.orders-footer { padding:1.5rem 2rem; border-top:1px solid var(--border); flex-shrink:0; }
-.orders-clear-btn { width:100%; background:transparent; border:1px solid rgba(239,68,68,.2); border-radius:12px; padding:.75rem; color:#f87171; font-size:.8rem; font-weight:600; cursor:pointer; transition:all .2s; font-family:'Manrope',sans-serif; }
-.orders-clear-btn:hover { background:rgba(239,68,68,.08); border-color:rgba(239,68,68,.4); }
 
 /* ── TOAST ── */
 #toasts { position:fixed; bottom:5rem; right:2rem; z-index:800; display:flex; flex-direction:column; gap:.5rem; pointer-events:none; }

@@ -30,18 +30,9 @@
       <li><a href="#how">Как это работает</a></li>
       <li><a href="#reviews">Отзывы</a></li>
       <li><a href="#faq">FAQ</a></li>
-      <li><button class="nav-orders-btn" id="navOrders">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="1" width="12" height="14" rx="2"/><path d="M5 5h6M5 8h6M5 11h4"/></svg>
-        Мои заказы
-        <span class="orders-badge" id="navOrdersBadge" style="display:none">0</span>
-      </button></li>
       <li><button class="nav-cta" id="navSupport">Поддержка</button></li>
     </ul>
     <div class="nav-right-mob">
-      <button class="mob-orders-icon" id="mobOrdersIcon" aria-label="Мои заказы">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="1" width="12" height="14" rx="2"/><path d="M5 5h6M5 8h6M5 11h4"/></svg>
-        <span class="orders-badge" id="mobOrdersBadge" style="display:none">0</span>
-      </button>
       <button class="burger" id="burgerBtn" aria-label="Меню">
         <span></span><span></span><span></span>
       </button>
@@ -420,21 +411,6 @@
       <button class="m-close" id="mClose">Закрыть</button>
       <button class="m-copy" id="mCopy">Копировать</button>
     </div>
-  </div>
-</div>
-
-<!-- ORDERS PANEL -->
-<div class="orders-overlay" id="ordersOverlay"></div>
-<div class="orders-panel" id="ordersPanel">
-  <div class="orders-header">
-    <div class="orders-title">
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="1" width="12" height="14" rx="2"/><path d="M5 5h6M5 8h6M5 11h4"/></svg>
-      Мои заказы
-    </div>
-    <button class="orders-close" id="ordersClose">✕</button>
-  </div>
-  <div class="orders-body" id="ordersBody">
-    <!-- filled by JS -->
   </div>
 </div>
 

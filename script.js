@@ -82,10 +82,7 @@ function showModal(o) {
 
 function closeModal() {
   modal.classList.remove('show');
-  // don't re-enable scroll if orders panel open
-  if (!document.getElementById('ordersPanel').classList.contains('open')) {
-    document.body.style.overflow = '';
-  }
+  document.body.style.overflow = '';
 }
 
 document.getElementById('mClose').addEventListener('click', closeModal);
@@ -99,7 +96,7 @@ if (mCopyBtn) {
   });
 }
 modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeOrdersPanel(); } });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); } });
 
 /* ── TOAST ── */
 function toast(msg, dur = 2200) {
@@ -226,132 +223,6 @@ function getNick() {
   return (a?.value || b?.value || '').trim();
 }
 
-/* ─────────────────────────────────────────
-   ORDER HISTORY (localStorage)
-───────────────────────────────────────── */
-const STORAGE_KEY = 'rbxdrop_orders';
-
-function loadOrders() {
-  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
-  catch { return []; }
-}
-
-function saveOrders(orders) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(orders));
-}
-
-function addOrder(order) {
-  const orders = loadOrders();
-  orders.unshift(order); // newest first
-  saveOrders(orders);
-  updateOrdersBadge();
-}
-
-function clearOrders() {
-  localStorage.removeItem(STORAGE_KEY);
-  updateOrdersBadge();
-  renderOrdersPanel();
-}
-
-function updateOrdersBadge() {
-  const orders = loadOrders();
-  const count = orders.length;
-  [document.getElementById('navOrdersBadge'), document.getElementById('mobOrdersBadge')].forEach(b => {
-    if (!b) return;
-    b.textContent = count;
-    b.style.display = count > 0 ? 'inline-block' : 'none';
-  });
-}
-
-function genOrderId() {
-  return 'RBX-' + Date.now().toString(36).toUpperCase().slice(-6);
-}
-
-function renderOrdersPanel() {
-  const body = document.getElementById('ordersBody');
-  const orders = loadOrders();
-
-  if (orders.length === 0) {
-    body.innerHTML = `
-      <div class="orders-empty">
-        <div class="orders-empty-ico">📋</div>
-        <div class="orders-empty-t">Заказов пока нет</div>
-        <div class="orders-empty-s">Твои заказы будут сохраняться здесь автоматически после оформления.</div>
-      </div>`;
-    return;
-  }
-
-  const now = Date.now();
-  body.innerHTML = orders.map(o => {
-    // status logic: pending for 30 min, processing for 3 days, then done
-    const age = now - o.timestamp;
-    let status, statusLabel;
-    if (age < 30 * 60 * 1000) { status = 'st-pending'; statusLabel = 'Ожидает'; }
-    else if (age < 3 * 24 * 60 * 60 * 1000) { status = 'st-processing'; statusLabel = 'Обрабатывается'; }
-    else { status = 'st-done'; statusLabel = 'Выполнен'; }
-
-    const isActive = status === 'st-pending';
-    const d = new Date(o.timestamp);
-    const dateStr = d.toLocaleString('ru', { day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit' });
-
-    return `
-      <div class="order-card ${isActive ? 'active-order' : ''}">
-        <div class="oc-header">
-          <div class="oc-id">${o.id}</div>
-          <div class="oc-status ${status}">${statusLabel}</div>
-        </div>
-        <div class="oc-rbx">${fmt(o.robux)} R$</div>
-        <div class="oc-method">${o.method}</div>
-        <div class="oc-meta">
-          <div class="oc-nick">${o.nick}</div>
-          <div class="oc-price">${fmt(o.price)} ₽</div>
-        </div>
-        <div class="oc-date">${dateStr}</div>
-      </div>`;
-  }).join('');
-}
-
-/* ── ORDERS PANEL ── */
-const ordersPanel = document.getElementById('ordersPanel');
-const ordersOverlay = document.getElementById('ordersOverlay');
-
-function openOrdersPanel() {
-  renderOrdersPanel();
-  ordersPanel.classList.add('open');
-  ordersOverlay.classList.add('show');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeOrdersPanel() {
-  ordersPanel.classList.remove('open');
-  ordersOverlay.classList.remove('show');
-  if (!modal.classList.contains('show')) document.body.style.overflow = '';
-}
-
-document.getElementById('ordersClose').addEventListener('click', closeOrdersPanel);
-ordersOverlay.addEventListener('click', closeOrdersPanel);
-
-document.getElementById('navOrders').addEventListener('click', openOrdersPanel);
-const mobOrdersIcon = document.getElementById('mobOrdersIcon');
-if (mobOrdersIcon) mobOrdersIcon.addEventListener('click', openOrdersPanel);
-
-document.getElementById('orders-clear-btn-ref')?.addEventListener('click', () => {});
-// footer clear btn rendered in panel
-document.getElementById('ordersPanel').addEventListener('click', e => {
-  if (e.target.closest('.orders-clear-btn')) {
-    if (confirm('Очистить всю историю заказов?')) {
-      clearOrders();
-      toast('🗑 История очищена');
-    }
-  }
-});
-
-// Inject footer into orders panel
-const ordersFooter = document.createElement('div');
-ordersFooter.className = 'orders-footer';
-ordersFooter.innerHTML = '<button class="orders-clear-btn">Очистить историю</button>';
-ordersPanel.appendChild(ordersFooter);
-
 /* ── ORDER SUBMIT ── */
 function submitOrder() {
   const nick = getNick();
@@ -371,23 +242,12 @@ function submitOrder() {
 
   const v = parseInt(slider.value);
   const rub = Math.round(v * activeRate);
-  const orderId = genOrderId();
-
-  // Save to history
-  addOrder({
-    id: orderId,
-    nick: nick,
-    robux: v,
-    price: rub,
-    method: activeMethodName,
-    timestamp: Date.now()
-  });
 
   showModal({
     icon: '🎉',
     title: 'Заказ принят!',
     text: 'Наш менеджер свяжется с тобой в Telegram и пришлёт ссылку на Game Pass для оплаты.',
-    code: `ID заказа: ${orderId}\nАккаунт:  ${nick}\nСумма:    ${fmt(v)} R$\nК оплате: ${fmt(rub)} ₽\nСпособ:   ${activeMethodName}\n\nТелеграм: @RbxShop_Manager`
+    code: `Аккаунт:  ${nick}\nСумма:    ${fmt(v)} R$\nК оплате: ${fmt(rub)} ₽\nСпособ:   ${activeMethodName}\n\nТелеграм: @RbxShop_Manager`
   });
 }
 
@@ -453,4 +313,3 @@ if (stickyBar && orderSection) {
 }
 
 /* ── INIT ── */
-updateOrdersBadge();
