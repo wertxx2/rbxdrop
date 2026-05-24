@@ -537,7 +537,28 @@ function getNick() {
    ORDER SUBMIT
 ───────────────────────────────────────── */
 function submitOrder() {
-  const nick = getNick();
+  fetch('/api/order', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        username: getNick(),
+        robux: parseInt(document.getElementById('robuxSlider').value),
+        price: Math.round(parseInt(document.getElementById('robuxSlider').value) * activeRate)
+    })
+});
+  const nick = getNick();fetch('/api/order', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        username: nick,
+        robux: v,
+        price: rub
+    })
+});
   if (!nick) {
     showModal({ icon:'⚠️', title:'Введи ник', text:'Укажи ник своего Roblox аккаунта для оформления заказа.', warn:true });
     (document.getElementById('nickInputMob') || document.getElementById('nickInput'))?.focus();

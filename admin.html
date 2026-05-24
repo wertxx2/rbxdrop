@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Admin</title>
+</head>
+<body>
+
+<h1>Заказы</h1>
+
+<div id="orders"></div>
+
+<script>
+async function load() {
+    const res = await fetch('/api/orders');
+    const data = await res.json();
+
+    document.getElementById('orders').innerHTML = data.map(o => `
+        <div style="border:1px solid #333;padding:10px;margin:10px;">
+            <b>${o.username}</b><br>
+            Robux: ${o.robux}<br>
+            Price: ${o.price}₽<br>
+            Status: ${o.status}
+        </div>
+    `).join('');
+}
+
+load();
+setInterval(load, 3000);
+</script>
+
+</body>
+</html>
