@@ -3,398 +3,248 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>RBXDROP — Купить робуксы дёшево</title>
+<title>Войти — RBXDROP</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Manrope:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="login-page">
 
+<!-- BACKGROUND -->
+<div class="bg-grid"></div>
 <div class="orb orb1"></div>
 <div class="orb orb2"></div>
 <div class="orb orb3"></div>
+<div class="orb orb4"></div>
+<div class="particles" id="particles"></div>
 
-<!-- CURSOR (desktop only) -->
-<div class="cur" id="curDot"><div class="cur-dot"></div></div>
-<div class="cur" id="curRing"><div class="cur-ring"></div></div>
+<div class="wrapper">
 
-<!-- NAV -->
-<nav id="mainNav">
-  <div class="nav-i">
-    <a class="logo" href="#" id="navHome">
+  <!-- LOGO -->
+  <div class="logo-wrap">
+    <a class="logo" href="home.html">
       RBXDROP <span class="logo-badge">PRO</span>
       <span class="logo-pulse"></span>
     </a>
-    <ul class="nav-links">
-      <li><a href="#order">Купить</a></li>
-      <li><a href="#how">Как это работает</a></li>
-      <li><a href="#reviews">Отзывы</a></li>
-      <li><a href="#faq">FAQ</a></li>
-      <li><button class="nav-cta" id="navSupport">Поддержка</button></li>
-    </ul>
-    <div class="nav-right-mob">
-      <button class="burger" id="burgerBtn" aria-label="Меню">
-        <span></span><span></span><span></span>
+    <span class="logo-sub">secure workspace</span>
+  </div>
+
+  <div class="card">
+
+    <!-- TABS -->
+    <div class="tabs" id="tabs">
+      <button class="tab active" id="tabLogin"    onclick="switchTab('login')">Войти</button>
+      <button class="tab"        id="tabRegister" onclick="switchTab('register')">Регистрация</button>
+    </div>
+
+    <!-- ── LOGIN VIEW ── -->
+    <div class="view active" id="viewLogin">
+
+      <div class="card-header">
+        <div class="card-title">С возвращением 👋</div>
+        <div class="card-desc">Войди через соцсеть или используй логин и пароль</div>
+      </div>
+
+      <a class="social-btn discord" href="/auth/discord/start">
+        <svg viewBox="0 0 24 24" fill="currentColor" style="color:#7289DA">
+          <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.043.03.056a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
+        </svg>
+        <div class="social-btn-text">
+          <span class="social-btn-main">Войти через Discord</span>
+          <span class="social-btn-sub">Быстрый вход за 1 клик</span>
+        </div>
+      </a>
+
+      <a class="social-btn telegram" href="/auth/telegram/start">
+        <svg viewBox="0 0 24 24" fill="currentColor" style="color:#0088CC">
+          <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+        </svg>
+        <div class="social-btn-text">
+          <span class="social-btn-main">Войти через Telegram</span>
+          <span class="social-btn-sub">Через Telegram аккаунт</span>
+        </div>
+      </a>
+
+      <div class="or-divider">или</div>
+
+      <div class="form-group">
+        <label class="form-label" for="loginEmail">Email</label>
+        <div class="input-wrap">
+          <input class="form-input" type="email" id="loginEmail" placeholder="you@example.com" autocomplete="email">
+        </div>
+        <div class="form-hint" id="loginEmailHint"></div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="loginPassword">Пароль</label>
+        <div class="input-wrap">
+          <input class="form-input" type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password" style="padding-right:2.8rem">
+          <span class="input-icon" id="loginPassToggle" title="Показать/скрыть">👁</span>
+        </div>
+        <div class="form-hint" id="loginPassHint"></div>
+      </div>
+
+      <div class="forgot-row">
+        <a class="forgot-link" href="#" onclick="switchView('recovery'); return false;">Забыл пароль?</a>
+      </div>
+
+      <button class="submit-btn" onclick="handleLogin()">
+        Войти
+        <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
-    </div>
-  </div>
-</nav>
 
-<!-- MOBILE MENU -->
-<div class="mob-menu" id="mobMenu">
-  <div class="mob-menu-inner">
-    <a href="#order" class="mob-link">🛒 Купить</a>
-    <a href="#how"   class="mob-link">📖 Как это работает</a>
-    <a href="#reviews" class="mob-link">⭐ Отзывы</a>
-    <a href="#faq"   class="mob-link">❓ FAQ</a>
-    <button class="nav-cta mob-cta" id="mobSupport">💬 Поддержка</button>
-  </div>
-</div>
+      <a class="recovery-btn" href="#" onclick="switchView('recovery'); return false;">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2a6 6 0 1 0 0 12A6 6 0 0 0 8 2zm0 3v4m0 2v.5"/></svg>
+        Recovery Token
+      </a>
 
-<!-- HERO -->
-<div class="wrap">
-  <section class="hero">
-    <div class="hero-eyebrow">
-      <span class="hero-eyebrow-dot"></span>
-      Мгновенная доставка · Без обмана
-    </div>
-    <div class="hero-grid">
-      <div class="hero-content">
-        <h1>Купи <span class="hl">Robux</span><br>за честную цену</h1>
-        <p class="hero-sub">Трансфер через Game Pass прямо на твой аккаунт. Проверенный продавец, поддержка 24/7.</p>
-        <div class="hero-btns">
-          <button class="btn-prim" id="heroBuyBtn">Купить робуксы →</button>
-          <button class="btn-sec"  id="heroHowBtn">Как это работает</button>
-        </div>
-        <div class="hero-stats">
-          <div class="hstat"><span class="hstat-v">Мгновенно</span><span class="hstat-l">Трансфер</span></div>
-          <div class="hstat-sep"></div>
-          <div class="hstat"><span class="hstat-v">до 5 дн.</span><span class="hstat-l">Срок доставки</span></div>
-          <div class="hstat-sep"></div>
-          <div class="hstat"><span class="hstat-v">24 / 7</span><span class="hstat-l">Поддержка</span></div>
-        </div>
-      </div>
-      <div class="hero-vis">
-        <div class="fbadge fbadge1">✓ Заказ доставлен</div>
-        <div class="hero-card">
-          <div class="hcard-top">
-            <span class="hcard-tag">АКТИВЕН</span>
-            <span class="hcard-ico">🟡</span>
-          </div>
-          <div class="hcard-num" id="heroCount">1 200</div>
-          <div class="hcard-sub" id="heroSub">Robux · Трансфер</div>
-          <div class="hcard-bar"><div class="hcard-bar-fill" id="heroBar"></div></div>
-          <div class="hcard-row">
-            <div class="hcard-user">
-              <div class="hcard-av" id="heroAv">?</div>
-              <div>
-                <div class="hcard-name" id="heroNickDisp">—</div>
-                <div style="font-size:.65rem;color:var(--muted)">Roblox аккаунт</div>
-              </div>
-            </div>
-            <div class="hcard-time">~3 дн.</div>
-          </div>
-        </div>
-        <div class="fbadge fbadge2">⚡ Безопасно</div>
-      </div>
-    </div>
-  </section>
-</div>
-
-<div class="divider"></div>
-
-<!-- HOW -->
-<div class="wrap">
-  <section class="section" id="how">
-    <div class="sec-label">Процесс</div>
-    <h2 class="sec-title reveal">Как это работает</h2>
-    <p class="sec-sub reveal">Три простых шага — и робуксы уже у тебя. Никаких сложных схем.</p>
-    <div class="how-grid">
-      <div class="how-card reveal">
-        <div class="how-num">01</div>
-        <div class="how-ico ico-a">🎯</div>
-        <div class="how-title">Выбери количество</div>
-        <div class="how-desc">Двигай ползунок или выбери готовый пак. Цена считается автоматически.</div>
-      </div>
-      <div class="how-card reveal" style="transition-delay:.1s">
-        <div class="how-num">02</div>
-        <div class="how-ico ico-b">📝</div>
-        <div class="how-title">Введи ник Roblox</div>
-        <div class="how-desc">Укажи точный ник аккаунта, куда нужно доставить робуксы.</div>
-      </div>
-      <div class="how-card reveal" style="transition-delay:.2s">
-        <div class="how-num">03</div>
-        <div class="how-ico ico-c">🚀</div>
-        <div class="how-title">Оплати и получи</div>
-        <div class="how-desc">После оплаты менеджер создаёт Game Pass. Ты покупаешь его — робуксы зачислены!</div>
-      </div>
-    </div>
-  </section>
-</div>
-
-<div class="divider"></div>
-
-<!-- ORDER -->
-<div class="wrap">
-  <section class="section" id="order">
-    <div class="sec-label">Покупка</div>
-    <h2 class="sec-title reveal">Оформить заказ</h2>
-    <p class="sec-sub reveal">Выбери способ, укажи количество и свой ник — всё остальное сделаем мы.</p>
-
-    <div class="order-layout">
-      <!-- LEFT -->
-      <div class="order-main">
-        <p class="method-label">Способ получения</p>
-        <div class="methods-row" id="methodsGrid">
-          <div class="mcard mactive" data-method="transfer" data-rate="1" data-available="true">
-            <div class="mcheck"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l2.5 2.5L9 1" stroke="#050608" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <span class="mtag t-avail">Доступно</span>
-            <div class="mname">Трансфер</div>
-            <div class="mdesc">Game Pass на твой аккаунт</div>
-          </div>
-          <div class="mcard mlocked" data-available="false" data-name="Промокод">
-            <span class="mtag t-soon">Скоро</span>
-            <div class="mname">Промокод</div>
-            <div class="mdesc">Gift Card — ключи активации</div>
-          </div>
-          <div class="mcard mlocked" data-available="false" data-name="Паки + Premium">
-            <span class="mtag t-soon">Скоро</span>
-            <div class="mname">Паки + Premium</div>
-            <div class="mdesc">Выгодные наборы с подпиской</div>
-          </div>
-        </div>
-
-        <!-- amount block -->
-        <div class="amount-block">
-          <div class="ab-top">
-            <div>
-              <div class="ab-label">Количество робуксов</div>
-              <div class="ab-big" id="abBig">1 200</div>
-              <div class="ab-unit">R$</div>
-            </div>
-            <div class="ab-rub">
-              <div class="ab-rub-v" id="abRub">1 200 ₽</div>
-              <div class="ab-rub-l">к оплате</div>
-            </div>
-          </div>
-          <div class="sl-track">
-            <div class="sl-fill" id="slFill"></div>
-            <input type="range" id="robuxSlider" min="100" max="10000" value="1200" step="50">
-          </div>
-          <div class="sl-ends"><span>100 R$</span><span>10 000 R$</span></div>
-          <div class="presets">
-            <button class="pre" data-v="500">500 R$</button>
-            <button class="pre" data-v="1000">1 000 R$</button>
-            <button class="pre" data-v="2000">2 000 R$</button>
-            <button class="pre" data-v="5000">5 000 R$</button>
-            <button class="pre" data-v="10000">10 000 R$</button>
-          </div>
-        </div>
-
-        <!-- nick (mobile) -->
-        <div class="nick-block-mobile" id="nickBlockMobile">
-          <label class="nick-label" for="nickInputMob">Ник в Roblox</label>
-          <div class="nick-wrap">
-            <input class="nick-inp" id="nickInputMob" placeholder="Введи свой ник..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
-            <div class="nick-clear" id="nickClearMob" title="Очистить">✕</div>
-          </div>
-          <div class="nick-hint" id="nickHintMob"></div>
-          <button class="order-cta mob-order-btn" id="orderBtnMob" style="display:none">
-            <span>Оформить заказ</span>
-            <svg class="btn-arrow" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-        </div>
+      <div class="card-footer">
+        Нет аккаунта? <a href="#" onclick="switchTab('register'); return false;">Зарегистрироваться</a>
       </div>
 
-      <!-- RIGHT SIDEBAR -->
-      <div class="order-side">
-        <div class="os-title">Ваш заказ</div>
-        <div class="os-row"><span class="os-key">Способ</span><span class="os-val" id="osMeth">Трансфер</span></div>
-        <div class="os-row"><span class="os-key">Количество</span><span class="os-val" id="osRbx">1 200 R$</span></div>
-        <div class="os-total"><span class="os-total-k">К оплате</span><span class="os-total-v" id="osTotal">1 200 ₽</span></div>
+    </div><!-- /viewLogin -->
 
-        <label class="nick-label" for="nickInput">Ник в Roblox</label>
-        <div class="nick-wrap">
-          <input class="nick-inp" id="nickInput" placeholder="Введи свой ник..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
-          <div class="nick-clear" id="nickClear" title="Очистить">✕</div>
-        </div>
-        <div class="nick-hint" id="nickHint"></div>
+    <!-- ── REGISTER VIEW ── -->
+    <div class="view" id="viewRegister">
 
-        <button class="order-cta" id="orderBtn">
-          <span id="orderBtnText">Оформить заказ</span>
-          <svg class="btn-arrow" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-
-        <div class="trust-list">
-          <div class="trust-i">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 1L10.3 5.8L15.5 6.6L11.75 10.2L12.6 15.4L8 13L3.4 15.4L4.25 10.2L0.5 6.6L5.7 5.8L8 1Z"/></svg>
-            Проверенный продавец
-          </div>
-          <div class="trust-i">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="5" width="14" height="10" rx="2"/><path d="M5 5V4a3 3 0 0 1 6 0v1"/></svg>
-            Безопасная сделка
-          </div>
-          <div class="trust-i">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="7"/><path d="M8 4v5l3 1.5"/></svg>
-            Ответим за 5 минут
-          </div>
-        </div>
+      <div class="card-header">
+        <div class="card-title">Создай аккаунт ✨</div>
+        <div class="card-desc">Зарегистрируйся через соцсеть или вручную</div>
       </div>
+
+      <a class="social-btn discord" href="/auth/discord/start">
+        <svg viewBox="0 0 24 24" fill="currentColor" style="color:#7289DA">
+          <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.043.03.056a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
+        </svg>
+        <div class="social-btn-text">
+          <span class="social-btn-main">Войти через Discord</span>
+          <span class="social-btn-sub">Аккаунт создастся автоматически</span>
+        </div>
+      </a>
+
+      <a class="social-btn telegram" href="/auth/telegram/start">
+        <svg viewBox="0 0 24 24" fill="currentColor" style="color:#0088CC">
+          <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+        </svg>
+        <div class="social-btn-text">
+          <span class="social-btn-main">Войти через Telegram</span>
+          <span class="social-btn-sub">Аккаунт создастся автоматически</span>
+        </div>
+      </a>
+
+      <div class="or-divider">или</div>
+
+      <div class="form-group">
+        <label class="form-label" for="regUsername">Никнейм</label>
+        <div class="input-wrap">
+          <input class="form-input" type="text" id="regUsername" placeholder="CoolPlayer123" autocomplete="username" autocorrect="off" autocapitalize="off">
+        </div>
+        <div class="form-hint" id="regUsernameHint"></div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="regEmail">Email</label>
+        <div class="input-wrap">
+          <input class="form-input" type="email" id="regEmail" placeholder="you@example.com" autocomplete="email">
+        </div>
+        <div class="form-hint" id="regEmailHint"></div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="regPassword">Пароль</label>
+        <div class="input-wrap">
+          <input class="form-input" type="password" id="regPassword" placeholder="Минимум 8 символов" autocomplete="new-password" style="padding-right:2.8rem">
+          <span class="input-icon" id="regPassToggle" title="Показать/скрыть">👁</span>
+        </div>
+        <div class="strength-bar" id="strengthBar">
+          <div class="strength-seg" id="s1"></div>
+          <div class="strength-seg" id="s2"></div>
+          <div class="strength-seg" id="s3"></div>
+          <div class="strength-seg" id="s4"></div>
+        </div>
+        <div class="strength-label" id="strengthLabel"></div>
+        <div class="form-hint" id="regPassHint"></div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="regPasswordConfirm">Повтори пароль</label>
+        <div class="input-wrap">
+          <input class="form-input" type="password" id="regPasswordConfirm" placeholder="••••••••" autocomplete="new-password" style="padding-right:2.8rem">
+          <span class="input-icon" id="regPassConfirmToggle" title="Показать/скрыть">👁</span>
+        </div>
+        <div class="form-hint" id="regPassConfirmHint"></div>
+      </div>
+
+      <div class="check-row">
+        <div class="check-box" id="termsCheck" onclick="toggleTerms()">
+          <svg viewBox="0 0 10 8" fill="none"><path d="M1 4l2.5 2.5L9 1" stroke="#050608" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <span class="check-text" onclick="toggleTerms()">
+          Я принимаю <a href="#" onclick="return false">Условия использования</a> и <a href="#" onclick="return false">Политику конфиденциальности</a>
+        </span>
+      </div>
+
+      <button class="submit-btn" onclick="handleRegister()">
+        Создать аккаунт
+        <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+
+      <div class="card-footer">
+        Уже есть аккаунт? <a href="#" onclick="switchTab('login'); return false;">Войти</a>
+      </div>
+
+    </div><!-- /viewRegister -->
+
+    <!-- ── RECOVERY VIEW ── -->
+    <div class="view" id="viewRecovery">
+
+      <button class="back-btn" onclick="switchView('login')">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 3L5 8l5 5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Назад
+      </button>
+
+      <div class="card-header">
+        <div class="card-title">Recovery Token 🔑</div>
+        <div class="card-desc">Введи токен восстановления — он был выдан при создании аккаунта</div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="recoveryToken">Токен восстановления</label>
+        <div class="input-wrap">
+          <input class="form-input token-input" type="text" id="recoveryToken"
+            placeholder="XXXX-XXXX-XXXX-XXXX"
+            maxlength="19"
+            autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false">
+        </div>
+        <div class="form-hint" id="recoveryHint"></div>
+      </div>
+
+      <button class="submit-btn" onclick="handleRecovery()">
+        Восстановить доступ
+        <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+
+      <div class="card-footer" style="margin-top:1.4rem">
+        Нет токена? <a href="#" onclick="switchView('login'); return false;">Войти иначе</a>
+      </div>
+
+    </div><!-- /viewRecovery -->
+
+    <!-- ── SUCCESS SCREEN ── -->
+    <div class="success-screen" id="successScreen">
+      <div class="success-ico">🎉</div>
+      <div class="success-t" id="successTitle">Добро пожаловать!</div>
+      <div class="success-s" id="successText">Аккаунт создан. Перенаправляем тебя...</div>
     </div>
 
-    <!-- sticky mobile CTA bar -->
-    <div class="sticky-bar" id="stickyBar">
-      <div class="sticky-info">
-        <span id="stickyRbx">1 200 R$</span>
-        <span class="sticky-sep">·</span>
-        <span id="stickyPrice">1 200 ₽</span>
-      </div>
-      <button class="order-cta sticky-cta" id="stickyOrderBtn">Оформить →</button>
+    <!-- SECURE BADGE -->
+    <div class="secure-badge">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 1l5 2v5c0 3-2 5-5 6C5 13 3 11 3 8V3l5-2z"/></svg>
+      защищённое соединение
     </div>
-  </section>
-</div>
 
-<div class="divider"></div>
-
-<!-- REVIEWS -->
-<div class="wrap">
-  <section class="reviews-section" id="reviews">
-    <div class="sec-label">Отзывы</div>
-    <h2 class="sec-title reveal">Нам доверяют</h2>
-    <p class="sec-sub reveal">Реальные покупатели, реальные истории.</p>
-    <div class="rev-grid">
-      <div class="rcard reveal">
-        <div class="rcard-head">
-          <div class="rav" style="background:linear-gradient(135deg,#FF9B2F,#FFCF6B)">K</div>
-          <div><div class="rname">KiraBlox</div><div class="rnick">@kirablox_rblx</div></div>
-        </div>
-        <div class="rstars">★★★★★</div>
-        <div class="rtext">Брала уже третий раз, всё как всегда — быстро и чётко. Менеджер ответил за пару минут, объяснил что делать. Робуксы пришли на следующий день!</div>
-        <span class="ramt">2 000 R$</span>
-      </div>
-      <div class="rcard reveal" style="transition-delay:.1s">
-        <div class="rcard-head">
-          <div class="rav" style="background:linear-gradient(135deg,#4F8EFF,#22D3A0)">M</div>
-          <div><div class="rname">MaxPro228</div><div class="rnick">@maxpro_rblx</div></div>
-        </div>
-        <div class="rstars">★★★★★</div>
-        <div class="rtext">Сначала сомневался, думал очередные мошенники. Но всё прошло гладко. Дали Game Pass, купил — всё зашло. Буду ещё брать, сайт топ.</div>
-        <span class="ramt">5 000 R$</span>
-      </div>
-      <div class="rcard reveal" style="transition-delay:.2s">
-        <div class="rcard-head">
-          <div class="rav" style="background:linear-gradient(135deg,#F43F5E,#FB923C)">A</div>
-          <div><div class="rname">AnyaGame</div><div class="rnick">@anyagame_yt</div></div>
-        </div>
-        <div class="rstars">★★★★★</div>
-        <div class="rtext">Лучший курс который нашла. Поддержка реально отвечает быстро. Для контентмейкеров самое то, часто нужны робуксы в больших кол-вах.</div>
-        <span class="ramt">10 000 R$</span>
-      </div>
-    </div>
-  </section>
-</div>
-
-<div class="divider"></div>
-
-<!-- FAQ -->
-<div class="wrap">
-  <section class="faq-section" id="faq">
-    <div class="sec-label">Вопросы</div>
-    <h2 class="sec-title reveal">Часто спрашивают</h2>
-    <div class="faq-list">
-      <div class="faq-item">
-        <div class="faq-q">Как происходит доставка робуксов?<div class="faq-ic"><svg viewBox="0 0 10 10" fill="none"><line x1="5" y1="1" x2="5" y2="9" stroke-width="1.5" stroke-linecap="round"/><line x1="1" y1="5" x2="9" y2="5" stroke-width="1.5" stroke-linecap="round"/></svg></div></div>
-        <div class="faq-a">Мы создаём специальный Game Pass в Roblox на нужную сумму. Ты покупаешь его в магазине Roblox, и робуксы сразу зачисляются на твой аккаунт.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Как быстро придут робуксы после оплаты?<div class="faq-ic"><svg viewBox="0 0 10 10" fill="none"><line x1="5" y1="1" x2="5" y2="9" stroke-width="1.5" stroke-linecap="round"/><line x1="1" y1="5" x2="9" y2="5" stroke-width="1.5" stroke-linecap="round"/></svg></div></div>
-        <div class="faq-a">В большинстве случаев — в течение нескольких часов. Максимальный срок — 5 рабочих дней.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Это безопасно для моего аккаунта Roblox?<div class="faq-ic"><svg viewBox="0 0 10 10" fill="none"><line x1="5" y1="1" x2="5" y2="9" stroke-width="1.5" stroke-linecap="round"/><line x1="1" y1="5" x2="9" y2="5" stroke-width="1.5" stroke-linecap="round"/></svg></div></div>
-        <div class="faq-a">Да, абсолютно. Мы не просим пароль. Всё через официальный Roblox Marketplace — никакого взлома и сторонних клиентов.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Что делать, если что-то пошло не так?<div class="faq-ic"><svg viewBox="0 0 10 10" fill="none"><line x1="5" y1="1" x2="5" y2="9" stroke-width="1.5" stroke-linecap="round"/><line x1="1" y1="5" x2="9" y2="5" stroke-width="1.5" stroke-linecap="round"/></svg></div></div>
-        <div class="faq-a">Пиши нам в Telegram: @RbxShop_Manager. Мы отвечаем 24/7. Если по нашей вине что-то не получилось — вернём деньги или повторим доставку бесплатно.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Есть ли минимальная и максимальная сумма заказа?<div class="faq-ic"><svg viewBox="0 0 10 10" fill="none"><line x1="5" y1="1" x2="5" y2="9" stroke-width="1.5" stroke-linecap="round"/><line x1="1" y1="5" x2="9" y2="5" stroke-width="1.5" stroke-linecap="round"/></svg></div></div>
-        <div class="faq-a">Минимальный заказ — 100 R$. Максимум через сайт — 10 000 R$. Если нужно больше — напиши менеджеру в Telegram.</div>
-      </div>
-    </div>
-  </section>
-</div>
-
-<!-- BANNER -->
-<div class="wrap">
-  <div class="banner reveal">
-    <h2>Готов купить робуксы?</h2>
-    <p>Это займёт меньше минуты. Поддержка 24/7 · Без обмана</p>
-    <button class="btn-prim" id="bannerBuyBtn">Оформить заказ →</button>
-  </div>
-</div>
-
-<!-- FOOTER -->
-<div class="wrap">
-  <footer>
-    <div class="foot-grid">
-      <div class="foot-brand">
-        <a class="logo" href="#">RBXDROP <span class="logo-badge">PRO</span></a>
-        <p class="foot-desc">Надёжный магазин робуксов с честным курсом. Работаем только через официальные механизмы Roblox.</p>
-      </div>
-      <div>
-        <div class="foot-col-title">Навигация</div>
-        <ul class="foot-links">
-          <li><a href="#order">Купить робуксы</a></li>
-          <li><a href="#how">Как это работает</a></li>
-          <li><a href="#reviews">Отзывы</a></li>
-          <li><a href="#faq">FAQ</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="foot-col-title">Способы</div>
-        <ul class="foot-links">
-          <li><a href="#">Трансфер (Game Pass)</a></li>
-          <li><a href="#" style="opacity:.4">Промокод — скоро</a></li>
-          <li><a href="#" style="opacity:.4">Паки + Premium — скоро</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="foot-col-title">Контакты</div>
-        <ul class="foot-links">
-          <li><a href="#">@RbxShop_Manager</a></li>
-          <li><a href="#">@palofsc</a></li>
-          <li><a href="#">Telegram поддержка</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="foot-bottom">
-      <span>© 2025 RBXDROP — не аффилировано с Roblox Corporation</span>
-      <div class="foot-social">
-        <a class="fsoc" href="#">✈</a>
-        <a class="fsoc" href="#">💬</a>
-      </div>
-    </div>
-  </footer>
-</div>
-
-<!-- MODAL -->
-<div class="modal" id="modal">
-  <div class="modal-box">
-    <div class="m-ico" id="mIco">✅</div>
-    <div class="m-title" id="mTitle"></div>
-    <div class="m-text"  id="mText"></div>
-    <div class="m-code"  id="mCode"></div>
-    <div class="m-btns">
-      <button class="m-close" id="mClose">Закрыть</button>
-      <button class="m-copy"  id="mCopy">Копировать</button>
-    </div>
-  </div>
-</div>
-
-<!-- TOASTS -->
-<div id="toasts"></div>
+  </div><!-- /card -->
+</div><!-- /wrapper -->
 
 <script src="script.js"></script>
 </body>

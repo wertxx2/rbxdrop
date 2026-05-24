@@ -166,13 +166,32 @@ function showSuccess(title, text) {
 function handleLogin() {
   const email = document.getElementById('loginEmail').value.trim();
   const pass  = document.getElementById('loginPassword').value;
+
   let ok = true;
-  if (!email || !isEmail(email)) { setHint('loginEmailHint','Введи корректный email','err'); ok=false; }
-  else setHint('loginEmailHint','','');
-  if (!pass || pass.length < 6) { setHint('loginPassHint','Минимум 6 символов','err'); ok=false; }
-  else setHint('loginPassHint','','');
+
+  if (!email || !isEmail(email)) {
+    setHint('loginEmailHint','Введи корректный email','err');
+    ok = false;
+  } else {
+    setHint('loginEmailHint','','');
+  }
+
+  if (!pass || pass.length < 6) {
+    setHint('loginPassHint','Минимум 6 символов','err');
+    ok = false;
+  } else {
+    setHint('loginPassHint','','');
+  }
+
   if (!ok) return;
+
+  localStorage.setItem('loggedIn', 'true');
+
   showSuccess('Добро пожаловать!', 'Входим в аккаунт...');
+
+  setTimeout(() => {
+    window.location.href = 'home.html';
+  }, 1200);
 }
 
 function handleRegister() {
@@ -180,19 +199,54 @@ function handleRegister() {
   const email= document.getElementById('regEmail').value.trim();
   const pass = document.getElementById('regPassword').value;
   const conf = document.getElementById('regPasswordConfirm').value;
+
   let ok = true;
-  if (!un || un.length < 3) { setHint('regUsernameHint','Минимум 3 символа','err'); ok=false; }
-  else if (!/^[a-zA-Z0-9_]+$/.test(un)) { setHint('regUsernameHint','Только латиница, цифры и _','err'); ok=false; }
-  else setHint('regUsernameHint','✓ Отличный никнейм','');
-  if (!email || !isEmail(email)) { setHint('regEmailHint','Введи корректный email','err'); ok=false; }
-  else setHint('regEmailHint','✓ Email выглядит верно','');
-  if (!pass || pass.length < 8) { setHint('regPassHint','Минимум 8 символов','err'); ok=false; }
-  else setHint('regPassHint','','');
-  if (pass !== conf) { setHint('regPassConfirmHint','Пароли не совпадают','err'); ok=false; }
-  else if (conf) setHint('regPassConfirmHint','✓ Пароли совпадают','');
-  if (!termsAccepted) { alert('Прими условия использования'); ok=false; }
+
+  if (!un || un.length < 3) {
+    setHint('regUsernameHint','Минимум 3 символа','err');
+    ok = false;
+  } else if (!/^[a-zA-Z0-9_]+$/.test(un)) {
+    setHint('regUsernameHint','Только латиница, цифры и _','err');
+    ok = false;
+  } else {
+    setHint('regUsernameHint','✓ Отличный никнейм','');
+  }
+
+  if (!email || !isEmail(email)) {
+    setHint('regEmailHint','Введи корректный email','err');
+    ok = false;
+  } else {
+    setHint('regEmailHint','✓ Email выглядит верно','');
+  }
+
+  if (!pass || pass.length < 8) {
+    setHint('regPassHint','Минимум 8 символов','err');
+    ok = false;
+  } else {
+    setHint('regPassHint','','');
+  }
+
+  if (pass !== conf) {
+    setHint('regPassConfirmHint','Пароли не совпадают','err');
+    ok = false;
+  } else if (conf) {
+    setHint('regPassConfirmHint','✓ Пароли совпадают','');
+  }
+
+  if (!termsAccepted) {
+    alert('Прими условия использования');
+    ok = false;
+  }
+
   if (!ok) return;
+
+  localStorage.setItem('loggedIn', 'true');
+
   showSuccess('Аккаунт создан! 🎉', 'Добро пожаловать в RBXDROP. Перенаправляем...');
+
+  setTimeout(() => {
+    window.location.href = 'home.html';
+  }, 1200);
 }
 
 function handleRecovery() {
@@ -216,7 +270,7 @@ document.addEventListener('keydown', e => {
 });
 
 /* ════════════════════════════════════════════════════
-   MAIN PAGE SCRIPTS (index.html)
+   MAIN PAGE SCRIPTS (home.html)
    ════════════════════════════════════════════════════ */
 
 /* ─────────────────────────────────────────
